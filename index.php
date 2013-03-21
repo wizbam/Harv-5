@@ -48,25 +48,20 @@ while(1) {
 			fputs($socket, "PONG ".$ex[1]."\n");
 		}
  
-		// Commands with nothing after them
+		// Commands
 		$command = str_replace(array(chr(10), chr(13)), '', $ex[3]);
-		// Commands with something after them
-		$command2 = str_replace(array(chr(10)), '', $ex[3]);
 		
 		if ($command == ":!report") {
 			fputs($socket, "PRIVMSG ".$ex[2]." :Harv-5 reporting for duty!\n");
 		}
 		
-		if ($command == ":fuck") {
-			fputs($socket, "PRIVMSG ".$ex[2]." :No! Fuck you!\n");
-		}
 		
-		if ($command2 == ":!link") {
+		if ($command == ":!link") {
 			fputs($socket, "PRIVMSG ".$ex[2]." :Steam ID linked to $ex[0]\n");
 			mysqli_query($con,"INSERT INTO steamid (Nick, SteamID) VALUES ('$nick','$ex[4]')");
 		}
 		
-		if ($command2 == ":!steam") {
+		if ($command == ":!steam") {
 			fputs($socket, "PRIVMSG ".$ex[2]." :$steamlookup\n");
 		}
 		
