@@ -56,13 +56,21 @@ while(1) {
 		}
 		
 		
-		if ($command == ":!link") {
+		if ($command == ":!steamlink") {
 			fputs($socket, "PRIVMSG ".$ex[2]." :Steam ID linked to $ex[0]\n");
 			mysqli_query($con,"INSERT INTO steamid (Nick, SteamID) VALUES ('$nick','$ex[4]')");
 		}
 		
 		if ($command == ":!steam") {
 			fputs($socket, "PRIVMSG ".$ex[2]." :$steamlookup\n");
+		}
+		
+		if ($command == ":!mod" && $ex[4] == False ) {
+			fputs($socket, "PRIVMSG ".$ex[2]." :Please specify a system.\n");
+		}
+		
+		if ($command == ":!mod" && $ex[4] == "wii") {
+			fputs($socket, "PRIVMSG ".$ex[2]." :http://wiibrew.org/wiki/Homebrew_setup#Letterbomb\n");
 		}
 		
 	}
